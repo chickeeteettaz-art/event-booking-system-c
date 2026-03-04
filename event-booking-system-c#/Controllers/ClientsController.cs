@@ -12,9 +12,9 @@ namespace event_booking_system_c_.Controllers
 {
     public class ClientsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly EventsDbContext _context;
 
-        public ClientsController(ApplicationDbContext context)
+        public ClientsController(EventsDbContext context)
         {
             _context = context;
         }
