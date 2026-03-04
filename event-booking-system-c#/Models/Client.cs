@@ -4,6 +4,7 @@ namespace event_booking_system_c_.Models
 {
     public class Client
     {
+        [Key]
         public int ClientId { get; set; }
 
         [Required, MaxLength(150)]

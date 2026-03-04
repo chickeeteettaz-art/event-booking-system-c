@@ -5,6 +5,7 @@ namespace event_booking_system_c_.Models
 {
     public class Event
     {
+        [Key]
         public int EventId { get; set; }
 
         public int ClientId { get; set; }

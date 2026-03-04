@@ -4,6 +4,7 @@ namespace event_booking_system_c_.Models
 {
     public class VenueType
     {
+        [Key]
         public int VenueTypeId { get; set; }
 
         [Required, MaxLength(100)]

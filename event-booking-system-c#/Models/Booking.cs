@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace event_booking_system_c_.Models
 {
     public class Booking
     {
+        [Key]
         public int BookingId { get; set; }
 
         public int EventId { get; set; }
