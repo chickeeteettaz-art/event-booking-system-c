@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace event_booking_system_c_.Data
 {
-    public class ApplicationDbContext:DbContext
+    public class EventsDbContext : DbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        public EventsDbContext(DbContextOptions<EventsDbContext> options) : base(options)
         {
         }
 
