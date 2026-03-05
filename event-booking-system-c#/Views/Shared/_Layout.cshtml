@@ -275,12 +275,23 @@
         }
 
         /*Client Details*/
+        .list-group-item.active {
+            background: linear-gradient(135deg, #ff8c5e 0%, #ff5e2e 100%) !important;
+            border-color: transparent !important;
+            color: white !important;
+        }
+
+        .list-group-item-action:hover {
+            background-color: #fff3ef;
+            transition: background-color 0.25s ease;
+        }
+
         .avatar-circle {
             transition: transform 0.3s ease;
         }
 
             .avatar-circle:hover {
-                transform: scale(1.08);
+                transform: scale(1.05);
             }
 
         .info-item {
@@ -288,7 +299,7 @@
         }
 
             .info-item:hover {
-                transform: translateY(-5px);
+                transform: translateY(-4px);
                 box-shadow: 0 10px 25px rgba(255, 107, 53, 0.15) !important;
             }
 
@@ -297,12 +308,12 @@
         }
 
         .hover-lift:hover {
-            transform: translateY(-3px) scale(1.04);
+            transform: translateY(-3px);
             box-shadow: 0 12px 30px rgba(255, 107, 53, 0.3) !important;
         }
 
         .drop-shadow {
-            text-shadow: 0 3px 10px rgba(0,0,0,0.5);
+            text-shadow: 0 2px 8px rgba(0,0,0,0.45);
         }
 
        /*update client page*/
