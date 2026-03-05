@@ -162,44 +162,92 @@
             padding: 3rem 0 1.5rem;
         }
 
-.service-card {
-    transition: all 0.35s ease;
-    border-radius: 1.2rem;
-    background: white;
-}
+        /*service cards styling*/
 
-.service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.15) !important;
-}
+        .service-card {
+            transition: all 0.35s ease;
+            border-radius: 1.2rem;
+            background: white;
+        }
 
-.feature-icon {
-    transition: transform 0.4s ease;
-}
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(255, 107, 53, 0.15) !important;
+        }
 
-.service-card:hover .feature-icon {
-    transform: scale(1.15);
-}
+        .feature-icon {
+            transition: transform 0.4s ease;
+        }
 
-.hover-orange:hover {
-    color: var(--primary) !important;
-    transition: color 0.3s ease;
-}
+        .service-card:hover .feature-icon {
+            transform: scale(1.15);
+        }
 
-footer a {
-    transition: color 0.3s ease;
-}
+        .hover-orange:hover {
+            color: var(--primary) !important;
+            transition: color 0.3s ease;
+        }
 
-footer hr {
-    border-color: rgba(255,255,255,0.15);
-}
+        footer a {
+            transition: color 0.3s ease;
+        }
 
-footer .form-control:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 0.25rem rgba(255,107,53,0.25);
-}
+        footer hr {
+            border-color: rgba(255,255,255,0.15);
+        }
 
-        
+        footer .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 0.25rem rgba(255,107,53,0.25);
+        }
+
+/*styling for client cards*/
+
+        [data-aos] {
+            opacity: 0;
+            transition-property: opacity, transform;
+        }
+
+        /* Card hover animation – lift, scale, orange glow */
+        .client-card {
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); /* bouncy feel */
+            
+        }
+
+            .client-card:hover {
+                transform: translateY(-12px) scale(1.04);
+                box-shadow: 0 25px 50px -12px rgba(255, 107, 53, 0.25), 0 0 0 4px rgba(255, 107, 53, 0.12) !important;
+            }
+
+            .card-header{
+                background: linear-gradient(135deg, #ff6b35 0%, #e55a2d 100%);
+            }
+
+                /* Subtle pulse on header gradient on hover */
+            .client-card:hover .card-header {
+                background: linear-gradient(135deg, #ff8c5e 0%, #ff5e2e 100%) !important;
+                transition: background 0.5s ease;
+            }
+
+        /* Button hover scale + color boost */
+        .hover-scale {
+            transition: all 0.3s ease;
+        }
+
+            .hover-scale:hover {
+                transform: scale(1.08);
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            }
+
+        .btn-primary.hover-lift:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Banner text shadow */
+        .drop-shadow {
+            text-shadow: 0 4px 12px rgba(0,0,0,0.6);
+        }
     </style>
 </head>
 <body>
