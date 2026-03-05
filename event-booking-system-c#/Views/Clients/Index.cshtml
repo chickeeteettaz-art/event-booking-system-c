@@ -1,41 +1,94 @@
 ﻿@model IEnumerable<event_booking_system_c_.Models.Client>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Clients Dashboard";
 }
 
-<h1>Index</h1>
+<!-- Banner Header – wide & shallow -->
+<div class="position-relative mb-4 mt-5 overflow-hidden" style="height: 220px;">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50"></div>
+    <img src="https://images.stockcake.com/public/5/7/8/57843c76-2524-4a49-87f5-ab4bfa57ab45/diverse-professional-team-stockcake.jpg"
+         alt="Diverse professional team"
+         class="w-100 h-100 object-fit-cover"
+         style="filter: brightness(0.85) contrast(1.1);" />
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white z-1">
+        <h1 class="display-4 fw-bold mb-2 drop-shadow">Clients Dashboard</h1>
+        <p class="lead opacity-90">Manage your registered clients and attendees</p>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FullName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailAddress)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FullName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailAddress)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ClientId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClientId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClientId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container-fluid px-3 px-lg-4">
+    <!-- Header with Create button -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <h2 class="mb-0 fw-bold text-dark">
+            All Clients
+            <span class="badge bg-primary ms-2 fs-6">@Model.Count()</span>
+        </h2>
+        <a asp-action="Create" class="btn btn-primary btn-lg rounded-pill px-4">
+            <i class="bi bi-plus-lg me-2"></i> Add New Client
+        </a>
+    </div>
+
+    <!-- Clients Grid -->
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center py-5 my-5">
+            <i class="bi bi-people-fill display-1 d-block mb-3 opacity-50"></i>
+            <h4>No clients registered yet</h4>
+            <p class="lead">Click "Add New Client" to get started.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 mb-5" >
+            @foreach (var item in Model)
+            {
+                <div class="col mb-5" data-aos="fade-up" data-aos-duration="700">
+                    <div class="card client-card h-100 border-0 shadow-sm rounded-4 overflow-hidden">
+                        <div class="card-header text-white d-flex align-items-center gap-3 py-3"
+                             style="background: linear-gradient(135deg, #ff6b35 0%, #ff8c5e 100%);">
+                            <!-- same inner content -->
+                        
+                            <div class="bg-white rounded-circle p-2 d-flex align-items-center justify-content-center" style="width: 52px; height: 52px;">
+                                <i class="bi bi-person-fill text-primary fs-3"></i>
+                            </div>
+                            <h5 class="mb-0 fw-bold">@Html.DisplayFor(modelItem => item.FullName)</h5>
+                        </div>
+
+                        <div class="card-body d-flex flex-column">
+                            <div class="mb-3">
+                                <div class="d-flex align-items-center gap-2 text-muted small mb-1">
+                                    <i class="bi bi-envelope-fill text-primary"></i>
+                                    <span>Email</span>
+                                </div>
+                                <p class="mb-0 fw-medium">@Html.DisplayFor(modelItem => item.EmailAddress)</p>
+                            </div>
+
+                            <!-- Add more fields if your Client model has them, e.g. Phone, RegistrationDate -->
+                            <!-- Example placeholder -->
+                            <div class="mt-auto pt-3 border-top">
+                                <div class="d-flex gap-2 flex-wrap">
+                                    <a asp-action="Edit" asp-route-id="@item.ClientId"
+                                       class="btn btn-outline-primary btn-sm rounded-pill px-3">
+                                        <i class="bi bi-pencil me-1"></i> Edit
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.ClientId"
+                                       class="btn btn-outline-secondary btn-sm rounded-pill px-3">
+                                        <i class="bi bi-eye me-1"></i> Details
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.ClientId"
+                                       class="btn btn-outline-danger btn-sm rounded-pill px-3">
+                                        <i class="bi bi-trash me-1"></i> Delete
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+
+

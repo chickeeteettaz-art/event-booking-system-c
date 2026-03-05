@@ -39,7 +39,9 @@ namespace event_booking_system_c_.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.AllClients = await _context.Clients
+            .OrderBy(c => c.FullName)
+            .ToListAsync();
             return View(client);
         }
 

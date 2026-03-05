@@ -1,39 +1,90 @@
 ﻿@model event_booking_system_c_.Models.Client
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Client";
 }
 
-<h1>Edit</h1>
-
-<h4>Client</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ClientId" />
-            <div class="form-group">
-                <label asp-for="FullName" class="control-label"></label>
-                <input asp-for="FullName" class="form-control" />
-                <span asp-validation-for="FullName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EmailAddress" class="control-label"></label>
-                <input asp-for="EmailAddress" class="form-control" />
-                <span asp-validation-for="EmailAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<!-- Shallower, cleaner banner -->
+<div class="position-relative mb-4 overflow-hidden rounded-4 shadow-sm"
+     style="height: 160px;"
+     data-aos="fade">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-65"></div>
+    <img src="https://images.unsplash.com/photo-1556155099-490a1ba16284?auto=format&fit=crop&q=80&w=2400"
+         alt="Modern professional workspace"
+         class="w-100 h-100 object-fit-cover"
+         style="filter: brightness(0.92) contrast(1.08);" />
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white z-1"
+         data-aos="fade-up" data-aos-delay="250">
+        <h2 class="fw-bold mb-1 drop-shadow">Edit Client</h2>
+        <p class="mb-0 opacity-90">Update client information</p>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container" style="max-width: 580px;">
+    <div class="card border-0 shadow rounded-4 overflow-hidden" data-aos="fade-up" data-aos-duration="800">
+        <div class="card-header text-white py-3 text-center"
+             style="background: linear-gradient(135deg, #ff6b35 0%, #e55a2d 100%);">
+            <h4 class="mb-1 fw-bold">Update Client</h4>
+            <small class="opacity-90">@Model.FullName</small>
+        </div>
+
+        <div class="card-body p-4 p-md-4 mb-5">
+            <form asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3 text-center"></div>
+
+                <input type="hidden" asp-for="ClientId" />
+
+                <!-- Full Name -->
+                <div class="mb-3">
+                    <label asp-for="FullName" class="form-label fw-medium text-muted small">Full Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0">
+                            <i class="bi bi-person-fill text-primary"></i>
+                        </span>
+                        <input asp-for="FullName" class="form-control rounded-pill"
+                               placeholder="John Doe" required autofocus />
+                    </div>
+                    <span asp-validation-for="FullName" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <!-- Email Address -->
+                <div class="mb-4">
+                    <label asp-for="EmailAddress" class="form-label fw-medium text-muted small">Email Address</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0">
+                            <i class="bi bi-envelope-fill text-primary"></i>
+                        </span>
+                        <input asp-for="EmailAddress" class="form-control rounded-pill"
+                               type="email" placeholder="name@example.com" required />
+                    </div>
+                    <span asp-validation-for="EmailAddress" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <!-- Action Buttons – smaller & tighter -->
+                <div class="d-flex flex-column flex-sm-row gap-2 justify-content-center mt-4">
+                    <button type="submit" class="btn btn-primary px-4 py-2 rounded-pill fw-semibold shadow-sm hover-lift">
+                        <i class="bi bi-save me-1"></i> Save Changes
+                    </button>
+                    <a asp-action="Details" asp-route-id="@Model.ClientId"
+                       class="btn btn-outline-secondary px-4 py-2 rounded-pill">
+                        <i class="bi bi-eye me-1"></i> View Details
+                    </a>
+                    <a asp-action="Index"
+                       class="btn btn-outline-secondary px-4 py-2 rounded-pill">
+                        <i class="bi bi-arrow-left me-1"></i> Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="card-footer bg-light text-center py-2 border-0 small text-muted">
+            Last updated: @DateTime.Now.ToString("dd MMM yyyy HH:mm") • Pretoria, Gauteng
+        </div>
+    </div>
 </div>
 
+
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }
