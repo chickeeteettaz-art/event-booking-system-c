@@ -3,51 +3,330 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - event_booking_system_c_</title>
-    <script type="importmap"></script>
+    <title>@ViewData["Title"] - EventSphere</title>
+
+    <!-- Bootstrap 5 CSS -->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- AOS - Animate On Scroll (lightweight ~12KB) -->
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+
+    <!-- Custom styles -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/event_booking_system_c_.styles.css" asp-append-version="true" />
+
+    <style>
+        :root {
+            --primary: #ff6b35; /* Vibrant orange */
+            --primary-dark: #e55a2d;
+            --accent-brown: #8d5524; /* Warm brown */
+            --light: #fdfaf5; /* Off-white / warm light */
+            --gray: #6c757d;
+        }
+
+        body {
+            background-color: var(--light);
+            color: #2d1e12;
+            font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .navbar {
+            background-color: white;
+            transition: all 0.4s ease;
+            padding: 1rem 0;
+        }
+
+            .navbar.scrolled {
+                box-shadow: 0 6px 20px rgba(0,0,0,0.07);
+            }
+
+        .navbar-brand {
+            font-weight: 800;
+            color: var(--primary);
+            font-size: 1.6rem;
+        }
+
+        .nav-link {
+            font-weight: 500;
+            color: #333 !important;
+            transition: color 0.3s;
+        }
+
+            .nav-link:hover,
+            .nav-link.active {
+                color: var(--primary) !important;
+            }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            font-weight: 600;
+            padding: 0.75rem 1.8rem;
+            border-radius: 50rem;
+            transition: all 0.3s;
+        }
+
+            .btn-primary:hover {
+                background-color: var(--primary-dark);
+                transform: translateY(-2px);
+            }
+
+        .btn-outline-primary {
+            border-color: var(--primary);
+            color: var(--primary);
+            border-radius: 50rem;
+        }
+
+            .btn-outline-primary:hover {
+                background-color: var(--primary);
+                color: white;
+            }
+
+        /* Hero */
+        .hero {
+            min-height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.58), rgba(0,0,0,0.68)), url('https://images.unsplash.com/photo-1505373877291-9030afd392fe?auto=format&fit=crop&q=80&w=2400') center/cover no-repeat fixed;
+            color: white;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+            .hero h1 {
+                font-size: clamp(2.8rem, 8vw, 5.5rem);
+                font-weight: 800;
+                line-height: 1.05;
+            }
+
+            .hero .lead {
+                font-size: 1.4rem;
+                max-width: 680px;
+                opacity: 0.95;
+            }
+
+        /* Features / Cards */
+        .feature-icon {
+            font-size: 3.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-event {
+            border: none;
+            border-radius: 1.2rem;
+            overflow: hidden;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+        }
+
+            .card-event:hover {
+                transform: translateY(-14px);
+                box-shadow: 0 24px 48px rgba(255,107,53,0.22);
+            }
+
+            .card-event .card-img-top {
+                height: 220px;
+                object-fit: cover;
+            }
+
+        .badge-event {
+            background-color: var(--accent-brown);
+            color: white;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-weight: 800;
+            position: relative;
+            display: inline-block;
+        }
+
+            .section-title:after {
+                content: '';
+                position: absolute;
+                bottom: -14px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 90px;
+                height: 5px;
+                background: var(--primary);
+                border-radius: 5px;
+            }
+
+        footer {
+            background: #2d1e12;
+            color: #d9c2a6;
+            padding: 3rem 0 1.5rem;
+        }
+
+.service-card {
+    transition: all 0.35s ease;
+    border-radius: 1.2rem;
+    background: white;
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(255, 107, 53, 0.15) !important;
+}
+
+.feature-icon {
+    transition: transform 0.4s ease;
+}
+
+.service-card:hover .feature-icon {
+    transform: scale(1.15);
+}
+
+.hover-orange:hover {
+    color: var(--primary) !important;
+    transition: color 0.3s ease;
+}
+
+footer a {
+    transition: color 0.3s ease;
+}
+
+footer hr {
+    border-color: rgba(255,255,255,0.15);
+}
+
+footer .form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.25rem rgba(255,107,53,0.25);
+}
+
+        
+    </style>
 </head>
 <body>
+
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">event_booking_system_c_</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom fixed-top">
+            <div class="container-fluid px-4 px-lg-5">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EventSphere</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-area="" asp-controller="Events" asp-action="Index">Discover Events</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Events" asp-action="Index">Events</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Host">Host an Event</a>
+                        </li>
+                        <li class="nav-item ms-lg-3">
+                            <a class="btn btn-primary rounded-pill" asp-area="" asp-controller="Account" asp-action="Login">Sign In</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
 
-    <footer class="border-top footer text-muted">
+    <main role="main">
+        @RenderBody()
+    </main>
+
+    <footer class="text-white py-5" style="background: #2d1e12; /* deep brown base */">
         <div class="container">
-            &copy; 2026 - event_booking_system_c_ - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            <div class="row g-5">
+                <!-- Brand & Description -->
+                <div class="col-lg-5">
+                    <h5 class="fw-bold mb-3" style="color: var(--primary);">EventSphere</h5>
+                    <p class="mb-4 opacity-85" style="max-width: 380px;">
+                        Discover, book, and host unforgettable experiences — concerts, festivals, conferences, markets and more across Gauteng, South Africa and beyond.
+                    </p>
+                    <!-- Social Icons (using Bootstrap Icons) -->
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white opacity-75 hover-opacity-100 fs-4" aria-label="Facebook">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                        <a href="#" class="text-white opacity-75 hover-opacity-100 fs-4" aria-label="Instagram">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="#" class="text-white opacity-75 hover-opacity-100 fs-4" aria-label="Twitter/X">
+                            <i class="bi bi-twitter-x"></i>
+                        </a>
+                        <a href="#" class="text-white opacity-75 hover-opacity-100 fs-4" aria-label="LinkedIn">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col-lg-2 col-md-4">
+                    <h6 class="fw-bold mb-3 text-uppercase" style="color: var(--primary);">Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a href="@Url.Action("Index", "Events")" class="text-reset text-decoration-none hover-orange">Browse Events</a></li>
+                        <li class="mb-2"><a href="#" class="text-reset text-decoration-none hover-orange">Host an Event</a></li>
+                        <li class="mb-2"><a href="#" class="text-reset text-decoration-none hover-orange">Become an Organizer</a></li>
+                        <li class="mb-2"><a href="#" class="text-reset text-decoration-none hover-orange">Help Center</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal & Company -->
+                <div class="col-lg-2 col-md-4">
+                    <h6 class="fw-bold mb-3 text-uppercase" style="color: var(--primary);">Company</h6>
+                    <ul class="list-unstyled small">
+                        <li class="mb-2"><a asp-controller="Home" asp-action="About" class="text-reset text-decoration-none hover-orange">About Us</a></li>
+                        <li class="mb-2"><a asp-controller="Home" asp-action="Privacy" class="text-reset text-decoration-none hover-orange">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-reset text-decoration-none hover-orange">Terms of Service</a></li>
+                        <li class="mb-2"><a href="#" class="text-reset text-decoration-none hover-orange">Cookie Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter / Contact -->
+                <div class="col-lg-3 col-md-4">
+                    <h6 class="fw-bold mb-3 text-uppercase" style="color: var(--primary);">Stay Updated</h6>
+                    <p class="small opacity-85 mb-3">Get the latest events & offers straight to your inbox.</p>
+                    <form class="d-flex flex-column gap-2">
+                        <input type="email" class="form-control form-control-sm rounded-pill" placeholder="Your email" aria-label="Email for newsletter" required>
+                        <button type="submit" class="btn btn-primary btn-sm rounded-pill fw-bold">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <hr class="my-4 opacity-25">
+
+            <div class="text-center small opacity-75">
+                <p class="mb-2">
+                    © 2026 EventSphere – Pretoria, Gauteng, South Africa •
+                    <span class="text-primary-orange">Made with passion & coffee</span>
+                </p>
+                <p class="mb-0">
+                    All rights reserved. Proudly supporting local experiences.
+                </p>
+            </div>
         </div>
     </footer>
+
+    <!-- Scripts -->
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener("scroll", function () {
+            document.querySelector(".navbar").classList.toggle("scrolled", window.scrollY > 80);
+        });
+
+        // Initialize AOS
+        AOS.init({
+            duration: 850,
+            once: true,
+            easing: 'ease-out-quart'
+        });
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

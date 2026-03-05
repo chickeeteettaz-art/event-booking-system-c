@@ -1,8 +1,83 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Discover & Book Unforgettable Events";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero text-center position-relative d-flex align-items-center justify-content-center"
+         style="background-image:
+                linear-gradient(rgba(0,0,0,0.60), rgba(0,0,0,0.75)),
+                url('https://thumbs.dreamstime.com/b/vibrant-concert-scene-crowd-celebrating-colorful-confetti-falling-bright-stage-lights-creating-energetic-atmosphere-367720143.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                min-height: 85vh;">
+
+    <div class="container position-relative z-1" data-aos="fade-up" data-aos-delay="150">
+        <h1 class="display-3 fw-bold mb-4">
+            Find Your Next <span style="color: var(--primary);">Epic Event</span>
+        </h1>
+        <p class="lead fs-4 mb-5 mx-auto" style="max-width: 720px;">
+            Concerts • Festivals • Markets • Conferences • Cultural Experiences — right here in Gauteng and beyond.
+        </p>
+
+        <div class="d-flex flex-column flex-sm-row gap-4 justify-content-center">
+            <a asp-controller="Events" asp-action="Index"
+               class="btn btn-primary btn-lg px-5 py-3 fw-bold rounded-pill">
+                Browse Events Now
+            </a>
+            <a href="#" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">
+                Host Your Own Event →
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Services / What We Offer Section -->
+<section class="py-5 py-lg-5 bg-white">
+    <div class="container">
+        <div class="text-center mb-5" data-aos="fade-up">
+            <h2 class="display-5 fw-bold section-title">What We Offer</h2>
+            <p class="lead text-muted mt-3">Simple, fast, and reliable tools for event lovers and organizers</p>
+        </div>
+
+        <div class="row g-4 g-lg-5 justify-content-center">
+            <!-- Service Card 1: Easy Booking -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                <div class="card h-100 border-0 shadow-sm text-center service-card p-4">
+                    <div class="mb-4">
+                        <i class="bi bi-ticket-perforated-fill feature-icon" style="font-size: 4.5rem; color: var(--primary);"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Easy & Instant Booking</h4>
+                    <p class="text-muted">
+                        Secure your spot in seconds with multiple payment options, e-tickets, and real-time availability.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Service Card 2: Discover Events -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                <div class="card h-100 border-0 shadow-sm text-center service-card p-4">
+                    <div class="mb-4">
+                        <i class="bi bi-calendar-event-fill feature-icon" style="font-size: 4.5rem; color: var(--primary);"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Discover Events</h4>
+                    <p class="text-muted">
+                        Browse thousands of upcoming events — concerts, workshops, festivals, markets, and more — filtered by date, location, and category.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Service Card 3: Find & Book Venues -->
+            <div class="col-md-6 col-lg-4" data-aos="fade-up" data-aos-delay="300">
+                <div class="card h-100 border-0 shadow-sm text-center service-card p-4">
+                    <div class="mb-4">
+                        <i class="bi bi-geo-alt-fill feature-icon" style="font-size: 4.5rem; color: var(--primary);"></i>
+                    </div>
+                    <h4 class="fw-bold mb-3">Venues & Locations</h4>
+                    <p class="text-muted">
+                        Explore and book beautiful venues across Gauteng and South Africa — from intimate halls to large outdoor spaces.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
