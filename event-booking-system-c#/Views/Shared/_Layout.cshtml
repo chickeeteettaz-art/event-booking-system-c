@@ -431,6 +431,35 @@
         .drop-shadow {
             text-shadow: 0 2px 8px rgba(0,0,0,0.45);
         }
+
+        /*events styling*/
+
+        .event-card {
+            transition: all 0.35s ease;
+            border-radius: 1.25rem;
+        }
+
+            .event-card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(255, 107, 53, 0.18) !important;
+            }
+
+        .hover-lift:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(255, 107, 53, 0.3) !important;
+        }
+
+        .drop-shadow {
+            text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+        }
+
+        .card-img-top {
+            transition: transform 0.4s ease;
+        }
+
+        .event-card:hover .card-img-top {
+            transform: scale(1.06);
+        }
         
     </style>
 </head>

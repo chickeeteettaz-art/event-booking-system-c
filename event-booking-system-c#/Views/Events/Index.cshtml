@@ -1,65 +1,115 @@
 ﻿@model IEnumerable<event_booking_system_c_.Models.Event>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Events Dashboard";
 }
 
-<h1>Index</h1>
+<!-- Banner Header -->
+<div class="position-relative mb-5 overflow-hidden rounded-4 shadow-sm mt-4"
+     style="height: 180px;"
+     data-aos="fade">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-60"></div>
+    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&q=80&w=2400"
+         alt="Crowd at modern event"
+         class="w-100 h-100 object-fit-cover"
+         style="filter: brightness(0.88) contrast(1.1);" />
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white z-1"
+         data-aos="fade-up" data-aos-delay="300">
+        <h1 class="display-5 fw-bold drop-shadow">Events Dashboard</h1>
+        <p class="lead opacity-90 mb-0">Manage upcoming & past events</p>
+    </div>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.EventName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Client)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Venue)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EventType)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Client.EmailAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Venue.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EventType.Title)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.EventId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.EventId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.EventId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container-fluid px-3 px-lg-4">
+    <!-- Header with Add button -->
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3"
+         data-aos="fade-down">
+        <h2 class="mb-0 fw-bold text-dark">
+            All Events
+            <span class="badge bg-primary ms-2 fs-6">@Model.Count()</span>
+        </h2>
+        <a asp-action="Create" class="btn btn-primary btn-lg rounded-pill px-4 shadow hover-lift">
+            <i class="bi bi-plus-lg me-2"></i> Create New Event
+        </a>
+    </div>
+
+    <!-- Events Grid -->
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info text-center py-5 my-5 rounded-4" data-aos="fade-up">
+            <i class="bi bi-calendar-event display-1 d-block mb-3 opacity-50"></i>
+            <h4>No events created yet</h4>
+            <p class="lead">Click "Create New Event" to get started.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+            @foreach (var item in Model)
+            {
+                <div class="col" data-aos="fade-up" data-aos-duration="700">
+                    <div class="card event-card h-100 border-0 shadow rounded-4 overflow-hidden">
+                        <!-- Event Image / Placeholder -->
+                        <div class="position-relative">
+                          
+                                <div class="bg-gradient d-flex align-items-center justify-content-center text-white"
+                                     style="height: 220px; background: linear-gradient(135deg, #ff6b35 0%, #e55a2d 100%);">
+                                    <i class="bi bi-calendar-event fs-1"></i>
+                                </div>
+                            
+
+                            <!-- Date Badge -->
+                            <span class="position-absolute top-0 start-0 m-3 badge bg-dark fs-6 px-3 py-2">
+                                @item.EventDate.ToString("dd MMM yyyy")
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="card-body d-flex flex-column p-4">
+                            <h5 class="card-title fw-bold mb-2">@item.EventName</h5>
+
+                            <p class="card-text text-muted small mb-3">
+                                <i class="bi bi-clock me-1 text-primary"></i>
+                                @item.EventDate.ToString("HH:mm")
+                                <br />
+                                <i class="bi bi-geo-alt-fill me-1 text-primary"></i>
+                                @item.Venue?.Location ?? "No venue"
+                            </p>
+
+                            <p class="card-text text-muted small mb-3 flex-grow-1">
+                                @(item.Description?.Length > 100 ? item.Description.Substring(0, 100) + "..." : item.Description)
+                            </p>
+
+                            <div class="mt-auto">
+                                <div class="d-flex gap-2 flex-wrap mb-3">
+                                    <span class="badge bg-warning text-dark">
+                                        @item.EventType?.Title ?? "Uncategorized"
+                                    </span>
+                                    <span class="badge bg-secondary">
+                                        Client: @item.Client?.EmailAddress?.Split('@')[0] 
+                                    </span>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <a asp-action="Edit" asp-route-id="@item.EventId"
+                                       class="btn btn-outline-primary btn-sm rounded-pill px-3 flex-grow-1">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.EventId"
+                                       class="btn btn-outline-secondary btn-sm rounded-pill px-3 flex-grow-1">
+                                        <i class="bi bi-eye"></i> View
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.EventId"
+                                       class="btn btn-outline-danger btn-sm rounded-pill px-3 flex-grow-1">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
