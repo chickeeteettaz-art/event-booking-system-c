@@ -1,54 +1,136 @@
 ﻿@model event_booking_system_c_.Models.Venue
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Venue";
 }
 
-<h1>Edit</h1>
-
-<h4>Venue</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="VenueId" />
-            <div class="form-group">
-                <label asp-for="VenueTypeId" class="control-label"></label>
-                <select asp-for="VenueTypeId" class="form-control" asp-items="ViewBag.VenueTypeId"></select>
-                <span asp-validation-for="VenueTypeId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Location" class="control-label"></label>
-                <input asp-for="Location" class="form-control" />
-                <span asp-validation-for="Location" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Capacity" class="control-label"></label>
-                <input asp-for="Capacity" class="form-control" />
-                <span asp-validation-for="Capacity" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ImageUrl" class="control-label"></label>
-                <input asp-for="ImageUrl" class="form-control" />
-                <span asp-validation-for="ImageUrl" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<!-- Banner Header -->
+<div class="position-relative mb-4 overflow-hidden rounded-4 shadow-sm mt-5"
+     style="height: 160px;"
+     data-aos="fade">
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-65"></div>
+    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80&w=2400"
+         alt="Modern event venue"
+         class="w-100 h-100 object-fit-cover"
+         style="filter: brightness(0.9) contrast(1.08);" />
+    <div class="position-absolute top-50 start-50 translate-middle text-center text-white z-1"
+         data-aos="fade-up" data-aos-delay="250">
+        <h2 class="fw-bold mb-1 drop-shadow">Edit Venue</h2>
+        <p class="mb-0 opacity-90">Update venue information</p>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+<div class="container" style="max-width: 620px;">
+    <div class="card border-0 shadow rounded-4 overflow-hidden" data-aos="fade-up" data-aos-duration="800">
+        <div class="card-header text-white py-3 text-center"
+             style="background: linear-gradient(135deg, #ff6b35 0%, #e55a2d 100%);">
+            <h4 class="mb-1 fw-bold">Edit Venue</h4>
+            <small class="opacity-90">@Model.Name</small>
+        </div>
+
+        <div class="card-body p-4">
+            <form asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3 text-center"></div>
+
+                <input type="hidden" asp-for="VenueId" />
+
+                <!-- Venue Type -->
+                <div class="mb-3">
+                    <label asp-for="VenueTypeId" class="form-label fw-medium text-muted small">Venue Type</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0">
+                            <i class="bi bi-tags-fill text-primary"></i>
+                        </span>
+                        <select asp-for="VenueTypeId" class="form-select rounded-pill"
+                                asp-items="ViewBag.VenueTypeId" required>
+                            <option value="">Select type...</option>
+                        </select>
+                    </div>
+                    <span asp-validation-for="VenueTypeId" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <!-- Name -->
+                <div class="mb-3">
+                    <label asp-for="Name" class="form-label fw-medium text-muted small">Venue Name</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0">
+                            <i class="bi bi-building-fill text-primary"></i>
+                        </span>
+                        <input asp-for="Name" class="form-control rounded-pill"
+                               placeholder="e.g. Sandton Convention Centre" required autofocus />
+                    </div>
+                    <span asp-validation-for="Name" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <!-- Location -->
+                <div class="mb-3">
+                    <label asp-for="Location" class="form-label fw-medium text-muted small">Location</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0">
+                            <i class="bi bi-geo-alt-fill text-primary"></i>
+                        </span>
+                        <input asp-for="Location" class="form-control rounded-pill"
+                               placeholder="e.g. Johannesburg, Gauteng" required />
+                    </div>
+                    <span asp-validation-for="Location" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <!-- Capacity -->
+                <div class="mb-3">
+                    <label asp-for="Capacity" class="form-label fw-medium text-muted small">Capacity</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0">
+                            <i class="bi bi-people-fill text-primary"></i>
+                        </span>
+                        <input asp-for="Capacity" class="form-control rounded-pill"
+                               type="number" min="1" placeholder="e.g. 2500" required />
+                    </div>
+                    <span asp-validation-for="Capacity" class="text-danger small mt-1 d-block"></span>
+                </div>
+
+                <!-- Image URL -->
+                <div class="mb-4">
+                    <label asp-for="ImageUrl" class="form-label fw-medium text-muted small">Image URL</label>
+                    <div class="input-group">
+                        <span class="input-group-text bg-light border-0">
+                            <i class="bi bi-image-fill text-primary"></i>
+                        </span>
+                        <input asp-for="ImageUrl" class="form-control rounded-pill"
+                               placeholder="https://example.com/venue-photo.jpg" />
+                    </div>
+                    <span asp-validation-for="ImageUrl" class="text-danger small mt-1 d-block"></span>
+                    <div class="form-text text-muted small mt-1">
+                        Paste a direct link to a high-quality venue photo
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center mt-4">
+                    <button type="submit" class="btn btn-primary px-5 py-2 rounded-pill fw-semibold shadow-sm hover-lift">
+                        <i class="bi bi-save me-1"></i> Save Changes
+                    </button>
+
+                    <a asp-action="Details" asp-route-id="@Model.VenueId"
+                       class="btn btn-outline-secondary px-5 py-2 rounded-pill">
+                        <i class="bi bi-eye me-1"></i> View Details
+                    </a>
+
+                    <a asp-action="Index"
+                       class="btn btn-outline-secondary px-5 py-2 rounded-pill">
+                        <i class="bi bi-arrow-left me-1"></i> Back to List
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="card-footer bg-light text-center py-2 border-0 small text-muted">
+            Last updated: @DateTime.Now.ToString("dd MMM yyyy HH:mm") • Pretoria, Gauteng
+        </div>
+    </div>
 </div>
 
+
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }
