@@ -18,6 +18,10 @@ namespace event_booking_system_c_.Models
         public DateTime EventDate { get; set; }
 
         public string? Description { get; set; }
+
+        [Required]
+        public string? ImageUrl { get; set; }
+
         [ForeignKey(nameof(ClientId))]
         public Client? Client { get; set; }
 
