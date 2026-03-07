@@ -9,7 +9,7 @@
      style="height: 180px;"
      data-aos="fade">
     <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-60"></div>
-    <img src="https://images.pexels.com/photos/20257664/pexels-photo-20257664/free-photo-of-panoramic-view-of-skyscrapers-in-a-modern-city.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&q=80&w=2400"
          alt="Modern event venue stage"
          class="w-100 h-100 object-fit-cover"
          style="filter: brightness(0.88) contrast(1.1);" />
@@ -44,12 +44,12 @@
     }
     else
     {
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 mb-5">
+
             @foreach (var item in Model)
             {
                 <div class="col" data-aos="fade-up" data-aos-duration="700">
                     <div class="card venue-card h-100 border-0 shadow rounded-4 overflow-hidden">
-                        <!-- Venue Image -->
                         <div class="position-relative">
                             @if (!string.IsNullOrWhiteSpace(item.ImageUrl))
                             {
@@ -66,24 +66,22 @@
                                 </div>
                             }
 
-                            <!-- Capacity Badge -->
                             <span class="position-absolute top-0 end-0 m-3 badge bg-dark fs-6 px-3 py-2">
                                 @item.Capacity people
                             </span>
                         </div>
 
-                        <!-- Card Body -->
                         <div class="card-body d-flex flex-column p-4">
-                            <h5 class="card-title fw-bold mb-2">@Html.DisplayFor(modelItem => item.Name)</h5>
+                            <h5 class="card-title fw-bold mb-2">@item.Name</h5>
                             <p class="card-text text-muted small mb-3">
                                 <i class="bi bi-geo-alt-fill me-1 text-primary"></i>
-                                @Html.DisplayFor(modelItem => item.Location)
+                                @item.Location
                             </p>
 
                             <div class="mt-auto">
                                 <div class="d-flex gap-2 flex-wrap">
                                     <span class="badge bg-warning text-dark">
-                                        @Html.DisplayFor(modelItem => item.VenueType.Title ?? "Uncategorized")
+                                        @(item.VenueType?.Title ?? "Uncategorized")
                                     </span>
                                 </div>
 
@@ -106,6 +104,7 @@
                     </div>
                 </div>
             }
+
         </div>
     }
 </div>
